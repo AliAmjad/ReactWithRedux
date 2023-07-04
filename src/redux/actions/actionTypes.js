@@ -1,1 +1,2 @@
 export const CREATE_COURSE = "CREATE_COURSE";
+export const REMOVE_COURSE = "REMOVE_COURSE";

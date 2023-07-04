@@ -18,7 +18,17 @@ class CoursesPage extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+
+    // step 1
+    //debugger;
+
+    // here we are dispatching the action
     this.props.actions.createCourse(this.state.course);
+  };
+
+  handleRemoveCourse = (event, course) => {
+    event.preventDefault();
+    this.props.actions.removeCourse(course);
   };
 
   render() {
@@ -32,9 +42,20 @@ class CoursesPage extends React.Component {
           value={this.state.course.title}
         />
         <input type="submit" value="Save" />
-        {this.props.courses.map((course) => (
-          <div key={course.title}>{course.title}</div>
-        ))}
+        <div>
+          {this.props.courses.map((course) => (
+            <div key={course.title}>
+              <div>{course.title}</div>
+              <div>
+                <input
+                  type="button"
+                  value="Remove"
+                  onClick={() => this.handleRemoveCourse(event, course)}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
       </form>
     );
   }
@@ -45,7 +66,11 @@ CoursesPage.propTypes = {
   actions: PropTypes.object.isRequired,
 };
 
+// this will be invoked by the reducer to update the state and then render will be invoked
 function mapStateToProps(state) {
+  // step 3
+  // debugger;
+
   return {
     courses: state.courses,
   };
